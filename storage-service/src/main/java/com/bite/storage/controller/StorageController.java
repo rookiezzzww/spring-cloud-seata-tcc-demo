@@ -1,6 +1,7 @@
 package com.bite.storage.controller;
 
 import com.bite.storage.service.StorageService;
+import com.bite.storage.service.StorageTccService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,12 @@ public class StorageController {
     private StorageService storageService;
 
     /**
+     * 本地TCC方法扣库存
+     */
+    @Autowired
+    private StorageTccService storageTccService;
+
+    /**
      * 扣库存
      * @param code 商品编号
      * @param count 要扣减的数量
@@ -25,7 +32,7 @@ public class StorageController {
     public ResponseEntity<String> deduct(@PathVariable("code") String code,
                                        @PathVariable("count") Integer count){
         log.info("扣减库存, code:{}, count:{}", code, count);
-        storageService.deduct(code, count);
+        storageTccService.prepare(code, count);
         return ResponseEntity.ok("success");
     }
 }

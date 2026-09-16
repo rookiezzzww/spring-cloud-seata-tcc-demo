@@ -11,4 +11,5 @@ public class StorageInfo {
     private Long id;
     private String commodityCode;
     private Integer count;
+    private Integer freezeCount; // 冻结数量
 }
